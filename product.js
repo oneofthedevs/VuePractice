@@ -34,7 +34,13 @@ Vue.component("product", {
       </div>
       <div class="review-section">
         <product-review @review-submit="addReview"></product-review>
-        <reviews v-bind:reviewList="reviewList"></reviews>
+        <div class="reviews" v-if="reviewList.length > 0">
+        {{reviewList}}
+        <div class="review" v-for"item in reviewList">
+          <h2>{{ item.name }} ⭐{{ item.rating }}</h2>
+          <p>{{ item.review }}</p>
+        </div>
+      </div>
       </div>
     </div>
     `,
@@ -150,7 +156,7 @@ Vue.component("reviews", {
     },
   },
   template: `
-    <div class="reviews" v-if="reviewList.length > 0">
+    <div class="reviews">
       {{reviewList}}
       <div class="review" v-for"item in reviews">
         <h2>{{ item.name }} ⭐{{ item.rating }}</h2>
